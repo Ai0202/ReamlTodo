@@ -1,3 +1,10 @@
+//プロジェクトを作成
+//Git管理下する
+//ライブラリを追加
+//UI部品を置く
+//線をひっぱる
+//コードを書く
+
 
 import Foundation
 import RealmSwift
@@ -32,9 +39,34 @@ class Todo: Object {
     }
     
     //取得
+    func getAll() {
+        let realm = try! Realm()
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        
+        let list = realm.objects(Todo.self)
+        
+        for value in list {
+            let todo = ["id": value.id, "title": value.title, "date": value.date] as NSDictionary
+            
+            self.list.append(todo)
+        }
+    }
     
     //更新
     
     //削除
+    func delete(id: Int) {
+        
+        //DBに接続
+        let realm = try! Realm()
+        
+        //削除するデータを取得する
+        let todo = realm.objects(Todo.self).filter("id = \(id)").first
+        
+        //取得したデータを削除する
+        try! realm.write {
+            realm.delete(todo!)
+        }
+    }
     
 }
