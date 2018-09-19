@@ -50,5 +50,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let id = todo.list[indexPath.row]["id"]!
+        performSegue(withIdentifier: "Segue", sender: id)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Segue" {
+            let addVC = segue.destination as! AddViewController
+            addVC.id = sender as! Int
+        }
+    }
 }
 
