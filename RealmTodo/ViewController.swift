@@ -2,10 +2,11 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     let todo = Todo()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,11 +19,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         todo.list.removeAll()
         todo.getAll()
         tableView.reloadData()
-        print(todo.list)
-        print()
-        
     }
+}
 
+
+//tableView関連
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    
     //行数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todo.list.count
@@ -63,4 +66,3 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
 }
-
